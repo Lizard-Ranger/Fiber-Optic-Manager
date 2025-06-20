@@ -1,0 +1,61 @@
+CREATE DATABASE IF NOT EXISTS webapp_db;
+USE webapp_db;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    is_admin TINYINT(1) NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS connections (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    length_m INT NOT NULL,
+    status VARCHAR(30) NOT NULL,
+    location VARCHAR(255),
+    notes TEXT,
+    latitude DECIMAL(10,7) NULL,
+    longitude DECIMAL(10,7) NULL,
+    core_count INT NOT NULL DEFAULT 12,
+    otdr_results VARCHAR(255) NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS maintenance (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    connection_id INT,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    scheduled_date DATE NOT NULL,
+    status VARCHAR(30) NOT NULL DEFAULT 'Scheduled',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (connection_id) REFERENCES connections(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS splice_links (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    connection_id INT NOT NULL,
+    core_a VARCHAR(50) NOT NULL,
+    core_b VARCHAR(50) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (connection_id) REFERENCES connections(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS fiber_tubes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    connection_id INT NOT NULL,
+    tube_number INT NOT NULL,
+    tube_name VARCHAR(32) NOT NULL,
+    tube_color VARCHAR(16) NOT NULL,
+    core_number INT NOT NULL,
+    core_name VARCHAR(32) NOT NULL,
+    core_color VARCHAR(16) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (connection_id) REFERENCES connections(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
