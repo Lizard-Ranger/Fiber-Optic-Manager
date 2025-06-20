@@ -2,7 +2,7 @@
 
 # === CONFIGURATION ===
 WEB_ROOT="/var/www/html"
-REPO_URL="https://github.com/yourusername/yourrepo.git"   # <-- CHANGE THIS TO YOUR REPO
+REPO_URL="https://github.com/Lizard-Ranger/Fiber-Optic-Manager.git"   # <-- CHANGE THIS TO YOUR REPO
 DB_NAME="webapp_db"
 DB_USER="fiberuser"
 DB_PASS="fiberpass123"
