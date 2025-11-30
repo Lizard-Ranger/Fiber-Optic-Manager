@@ -3,9 +3,9 @@
 # === CONFIGURATION ===
 WEB_ROOT="/var/www/html"
 REPO_URL="https://github.com/Lizard-Ranger/Fiber-Optic-Manager.git"   # <-- CHANGE THIS TO YOUR REPO
-DB_NAME="webapp_db"
+DB_NAME="fiberuser"
 DB_USER="fiberuser"
-DB_PASS="fiberpass123"
+DB_PASS="sL9DCLWXPUYkXHbNhYQH+NqAjkF#fh!VxRPs(Fxg7RXZ4gdNYyKWbLR&5)RBCJ7K"
 SCHEMA_FILE="$WEB_ROOT/config/schema.sql"
 BACKUP_DIR="$WEB_ROOT/uploads/db_backups"
 BACKUP_SCRIPT="$WEB_ROOT/backup_web_and_db.sh"
